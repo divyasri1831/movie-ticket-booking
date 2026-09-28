@@ -70,6 +70,55 @@
             font-size: 38px;
         }
 
+        /* RECOMMENDATION */
+
+        .recommendation {
+            background: linear-gradient(
+                135deg,
+                #241014,
+                #17171f
+            );
+
+            border: 1px solid #ff3b3b;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 35px;
+            text-align: center;
+        }
+
+        .recommendation h2 {
+            color: #ff3b3b;
+            margin-bottom: 10px;
+        }
+
+        .recommendation p {
+            color: #aaa;
+            margin-bottom: 18px;
+        }
+
+        .recommend-btn {
+            background: #ff3b3b;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .recommend-btn:hover {
+            background: #e52c2c;
+        }
+
+        #recommendationText {
+            margin-top: 18px;
+            color: #ffc107;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* FILTERS */
+
         .controls {
             display: flex;
             gap: 12px;
@@ -96,6 +145,8 @@
             color: white;
             outline: none;
         }
+
+        /* MOVIES */
 
         .movies {
             display: grid;
@@ -173,12 +224,15 @@
         }
 
         @media (max-width: 900px) {
+
             .movies {
                 grid-template-columns: repeat(2, 1fr);
             }
+
         }
 
         @media (max-width: 600px) {
+
             .movies {
                 grid-template-columns: 1fr;
             }
@@ -197,8 +251,10 @@
             h1 {
                 font-size: 30px;
             }
+
         }
     </style>
+
 </head>
 
 <body>
@@ -210,15 +266,35 @@
         </div>
 
         <div>
-            <a href="index.html">Home</a>
-            <a href="movies.html">Movies</a>
-            <a href="history.html">Bookings</a>
-            <a href="reviews.html">⭐ Reviews</a>
-            <a href="offers.html">🎁 Offers</a>
 
-            <button id="themeButton" onclick="toggleTheme()">
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="movies.html">
+                Movies
+            </a>
+
+            <a href="history.html">
+                Bookings
+            </a>
+
+            <a href="reviews.html">
+                ⭐ Reviews
+            </a>
+
+            <a href="offers.html">
+                🎁 Offers
+            </a>
+
+            <button
+                id="themeButton"
+                onclick="toggleTheme()">
+
                 ☀️ Light
+
             </button>
+
         </div>
 
     </nav>
@@ -226,8 +302,38 @@
 
     <div class="container">
 
-        <h1>🎬 Now Showing</h1>
+        <h1>
+            🎬 Now Showing
+        </h1>
 
+
+        <!-- SMART RECOMMENDATION -->
+
+        <div class="recommendation">
+
+            <h2>
+                🍿 Recommended For You
+            </h2>
+
+            <p>
+                Not sure what to watch?
+                Let MovieHub recommend a movie!
+            </p>
+
+            <button
+                class="recommend-btn"
+                onclick="recommendMovie()">
+
+                ✨ Recommend a Movie
+
+            </button>
+
+            <div id="recommendationText"></div>
+
+        </div>
+
+
+        <!-- SEARCH AND FILTER -->
 
         <div class="controls">
 
@@ -296,8 +402,14 @@
         </div>
 
 
-        <div class="movies" id="movieList">
+        <!-- MOVIE LIST -->
 
+        <div
+            class="movies"
+            id="movieList">
+
+
+            <!-- PARADISE -->
 
             <div
                 class="movie-card"
@@ -305,14 +417,18 @@
                 data-rating="8.5">
 
                 <div class="poster">
+
                     <img
                         src="paradise-poster.png"
                         alt="Paradise">
+
                 </div>
 
                 <div class="movie-info">
 
-                    <h2>Paradise</h2>
+                    <h2>
+                        Paradise
+                    </h2>
 
                     <p class="details">
                         Drama • Thriller
@@ -335,20 +451,26 @@
             </div>
 
 
+            <!-- SALAAR 2 -->
+
             <div
                 class="movie-card"
                 data-genre="action drama"
                 data-rating="8.8">
 
                 <div class="poster">
+
                     <img
                         src="salar2-poster.png"
                         alt="Salaar 2">
+
                 </div>
 
                 <div class="movie-info">
 
-                    <h2>Salaar 2</h2>
+                    <h2>
+                        Salaar 2
+                    </h2>
 
                     <p class="details">
                         Action • Drama
@@ -371,20 +493,26 @@
             </div>
 
 
+            <!-- FAUZI -->
+
             <div
                 class="movie-card"
                 data-genre="action war"
                 data-rating="8.6">
 
                 <div class="poster">
+
                     <img
                         src="fauzi-poster.png"
                         alt="Fauzi">
+
                 </div>
 
                 <div class="movie-info">
 
-                    <h2>Fauzi</h2>
+                    <h2>
+                        Fauzi
+                    </h2>
 
                     <p class="details">
                         Action • War
@@ -407,20 +535,26 @@
             </div>
 
 
+            <!-- SPIRIT -->
+
             <div
                 class="movie-card"
                 data-genre="action crime"
                 data-rating="8.7">
 
                 <div class="poster">
+
                     <img
                         src="spirit-poster.png"
                         alt="Spirit">
+
                 </div>
 
                 <div class="movie-info">
 
-                    <h2>Spirit</h2>
+                    <h2>
+                        Spirit
+                    </h2>
 
                     <p class="details">
                         Action • Crime
@@ -457,11 +591,18 @@
 
 
     <footer>
-        © 2026 MovieHub | Movie Ticket Booking System
+
+        © 2026 MovieHub |
+        Movie Ticket Booking System
+
     </footer>
 
 
     <script>
+
+        /*
+         * MOVIE FILTER
+         */
 
         function filterMovies() {
 
@@ -471,10 +612,12 @@
                 .value
                 .toLowerCase();
 
+
             const genre =
                 document
                 .getElementById("genre")
                 .value;
+
 
             const rating =
                 Number(
@@ -503,9 +646,7 @@
 
 
                 const genres =
-                    card
-                    .dataset
-                    .genre
+                    card.dataset.genre
                     .toLowerCase();
 
 
@@ -540,7 +681,8 @@
 
                 } else {
 
-                    card.style.display = "none";
+                    card.style.display =
+                        "none";
 
                 }
 
@@ -553,6 +695,71 @@
                 visible === 0
                 ? "block"
                 : "none";
+
+        }
+
+
+        /*
+         * SMART RECOMMENDATION
+         */
+
+        function recommendMovie() {
+
+            const movies = [
+
+                {
+                    name: "Paradise",
+                    genre: "Drama • Thriller",
+                    rating: "8.5"
+                },
+
+                {
+                    name: "Salaar 2",
+                    genre: "Action • Drama",
+                    rating: "8.8"
+                },
+
+                {
+                    name: "Fauzi",
+                    genre: "Action • War",
+                    rating: "8.6"
+                },
+
+                {
+                    name: "Spirit",
+                    genre: "Action • Crime",
+                    rating: "8.7"
+                }
+
+            ];
+
+
+            /*
+             * Random recommendation
+             */
+
+            const randomIndex =
+                Math.floor(
+                    Math.random() *
+                    movies.length
+                );
+
+
+            const movie =
+                movies[randomIndex];
+
+
+            document.getElementById(
+                "recommendationText"
+            ).innerHTML =
+
+                "🎬 We recommend " +
+                movie.name +
+                " — " +
+                movie.genre +
+                " — ⭐ " +
+                movie.rating +
+                "/10";
 
         }
 
