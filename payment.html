@@ -260,65 +260,72 @@
 
     <script>
 
-        let amount = 360;
-        let paymentMethod = "";
+       const booking = JSON.parse(
+    sessionStorage.getItem("movieHubBooking")
+) || {};
 
-        function applyCoupon() {
+let amount = Number(booking.total) || 0;
+let paymentMethod = "";
 
-            const coupon =
-                document.getElementById("coupon").value
-                .toUpperCase();
+document.getElementById("movie").textContent =
+    booking.movie || "Movie";
 
-            const message =
-                document.getElementById("couponMessage");
+document.getElementById("theatre").textContent =
+    booking.theatre || "Theatre";
 
-            if (coupon === "MOVIE50") {
+document.getElementById("date").textContent =
+    booking.date || "Date";
 
-                amount = 310;
+document.getElementById("show").textContent =
+    booking.show || "Show Time";
 
-                document.getElementById("totalAmount")
-                    .textContent = amount;
+document.getElementById("seats").textContent =
+    booking.seats || "No seats";
 
-                message.textContent =
-                    "✅ Coupon applied! ₹50 discount.";
+document.getElementById("totalAmount").textContent = amount;
 
-            } else {
+function applyCoupon() {
+    const coupon = document.getElementById("coupon").value.toUpperCase();
+    const message = document.getElementById("couponMessage");
 
-                message.style.color = "#ff5252";
+    if (coupon === "MOVIE50") {
+        amount = Math.max(0, Number(booking.total) - 50);
 
-                message.textContent =
-                    "❌ Invalid coupon code.";
+        document.getElementById("totalAmount").textContent = amount;
 
-            }
-        }
+        message.style.color = "#4caf50";
+        message.textContent = "✅ Coupon applied! ₹50 discount.";
+    } else {
+        message.style.color = "#ff5252";
+        message.textContent = "❌ Invalid coupon code.";
+    }
+}
 
+function selectMethod(method) {
+    document.querySelectorAll(".method").forEach(item => {
+        item.classList.remove("selected");
+    });
 
-        function selectMethod(method) {
+    method.classList.add("selected");
+    paymentMethod = method.textContent.trim();
+}
 
-            document
-                .querySelectorAll(".method")
-                .forEach(item => {
-                    item.classList.remove("selected");
-                });
+function makePayment() {
+    if (paymentMethod === "") {
+        alert("Please select a payment method.");
+        return;
+    }
 
-            method.classList.add("selected");
+    booking.finalAmount = amount;
+    booking.paymentMethod = paymentMethod;
 
-            paymentMethod = method.textContent.trim();
-        }
+    sessionStorage.setItem(
+        "movieHubBooking",
+        JSON.stringify(booking)
+    );
 
-
-        function makePayment() {
-
-            if (paymentMethod === "") {
-
-                alert("Please select a payment method.");
-
-                return;
-            }
-
-            window.location.href = "ticket.html";
-
-        }
+    window.location.href = "ticket.html";
+}
 
     </script>
 
