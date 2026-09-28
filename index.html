@@ -5,15 +5,212 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>MovieHub - Movie Ticket Booking</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #0b0b0f;
+            color: white;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 7%;
+            background: #111118;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff3b3b;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+        nav a:hover {
+            color: #ff3b3b;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 75vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+            background:
+                linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.9)),
+                radial-gradient(circle at center, #5c1010, #0b0b0f 65%);
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span {
+            color: #ff3b3b;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #cccccc;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            background: #ff3b3b;
+            color: white;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #e52c2c;
+        }
+
+        /* Features */
+        .features {
+            padding: 50px 7%;
+            text-align: center;
+        }
+
+        .features h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+
+        .cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: #17171f;
+            width: 220px;
+            padding: 30px 20px;
+            border-radius: 12px;
+            border: 1px solid #292933;
+        }
+
+        .card h3 {
+            margin: 15px 0 10px;
+        }
+
+        .card p {
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .icon {
+            font-size: 40px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #111118;
+            color: #888;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            nav {
+                padding: 18px 5%;
+            }
+
+            nav a {
+                margin-left: 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>🎬 Welcome to MovieHub</h1>
+    <nav>
+        <div class="logo">🎬 MovieHub</div>
 
-    <p>Book your favourite movie tickets easily!</p>
+        <div>
+            <a href="#">Home</a>
+            <a href="#">Movies</a>
+            <a href="#">Bookings</a>
+        </div>
+    </nav>
 
-    <button>Explore Movies</button>
+    <section class="hero">
+        <h1>Book Your <span>Movie</span> Tickets</h1>
+
+        <p>
+            Discover movies, choose your seats and book tickets easily.
+        </p>
+
+        <a href="#" class="btn">🎟️ Explore Movies</a>
+    </section>
+
+    <section class="features">
+
+        <h2>Why MovieHub?</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="icon">🎬</div>
+                <h3>Latest Movies</h3>
+                <p>Explore the latest movies and upcoming releases.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">💺</div>
+                <h3>Choose Your Seat</h3>
+                <p>Select your favourite seat before booking.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🎟️</div>
+                <h3>Easy Booking</h3>
+                <p>Book your movie tickets quickly and easily.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">📱</div>
+                <h3>Digital Ticket</h3>
+                <p>Get your booking details and digital ticket.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer>
+        © 2026 MovieHub | Movie Ticket Booking System
+    </footer>
 
 </body>
 </html>
