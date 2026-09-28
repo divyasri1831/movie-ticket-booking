@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>MovieHub - Booking History</title>
+
+    <link rel="stylesheet" href="theme.css">
+    <script src="theme.js" defer></script>
 
     <style>
         * {
@@ -37,11 +41,21 @@
         nav a {
             color: white;
             text-decoration: none;
-            margin-left: 25px;
+            margin-left: 18px;
         }
 
         nav a:hover {
             color: #ff3b3b;
+        }
+
+        #themeButton {
+            margin-left: 18px;
+            padding: 8px 14px;
+            border: none;
+            border-radius: 8px;
+            background: #292933;
+            color: white;
+            cursor: pointer;
         }
 
         .container {
@@ -65,20 +79,27 @@
 
         .movie {
             color: #ff3b3b;
-            font-size: 24px;
+            font-size: 25px;
             font-weight: bold;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
 
         .details {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 14px;
             color: #ccc;
         }
 
         .details strong {
             color: white;
+        }
+
+        .booking-id {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #292933;
+            color: #aaa;
         }
 
         .empty {
@@ -97,61 +118,59 @@
             border-radius: 8px;
         }
 
+        .amount {
+            color: #4caf50;
+            font-weight: bold;
+        }
+
         footer {
             text-align: center;
             padding: 25px;
             color: #777;
         }
 
-        @media (max-width: 600px) {
-            .details {
-                grid-template-columns: 1fr;
-            }
+        @media (max-width: 700px) {
 
             nav {
                 padding: 18px 5%;
+                flex-direction: column;
+                gap: 15px;
             }
 
             nav a {
-                margin-left: 10px;
-                font-size: 14px;
+                margin-left: 8px;
+                font-size: 13px;
+            }
+
+            .details {
+                grid-template-columns: 1fr;
             }
         }
-        #themeButton {
-    margin-left: 20px;
-    padding: 8px 14px;
-    border: none;
-    border-radius: 8px;
-    background: #292933;
-    color: white;
-    cursor: pointer;
-}
-
-#themeButton:hover {
-    background: #ff3b3b;
-}
     </style>
-    <link rel="stylesheet" href="theme.css">
-<script src="theme.js" defer></script>
 </head>
 
 <body>
 
     <nav>
-        <div class="logo">🎬 MovieHub</div>
+
+        <div class="logo">
+            🎬 MovieHub
+        </div>
 
         <div>
-    <a href="index.html">Home</a>
-    <a href="movies.html">Movies</a>
-    <a href="history.html">Bookings</a>
-    <a href="reviews.html">⭐ Reviews</a>
-    <a href="offers.html">🎁 Offers</a>
+            <a href="index.html">Home</a>
+            <a href="movies.html">Movies</a>
+            <a href="history.html">Bookings</a>
+            <a href="reviews.html">⭐ Reviews</a>
+            <a href="offers.html">🎁 Offers</a>
 
-    <button id="themeButton" onclick="toggleTheme()">
-        ☀️ Light
-    </button>
-</div>
+            <button id="themeButton" onclick="toggleTheme()">
+                ☀️ Light
+            </button>
+        </div>
+
     </nav>
+
 
     <div class="container">
 
@@ -160,6 +179,7 @@
         <div id="history"></div>
 
     </div>
+
 
     <footer>
         © 2026 MovieHub | Movie Ticket Booking System
@@ -171,74 +191,135 @@
         const historyContainer =
             document.getElementById("history");
 
-        const booking =
+
+        const bookingHistory =
             JSON.parse(
-                sessionStorage.getItem("movieHubBooking")
-            );
+                localStorage.getItem(
+                    "movieHubBookingHistory"
+                )
+            ) || [];
 
 
-        if (!booking) {
+        if (bookingHistory.length === 0) {
 
             historyContainer.innerHTML = `
-                <div class="empty">
-                    <h2>No bookings yet 🎬</h2>
-                    <p>Book a movie to see your booking history here.</p>
 
-                    <a href="movies.html" class="btn">
+                <div class="empty">
+
+                    <h2>
+                        No bookings yet 🎬
+                    </h2>
+
+                    <p>
+                        Book a movie to see your
+                        booking history here.
+                    </p>
+
+                    <a
+                        href="movies.html"
+                        class="btn">
+
                         Browse Movies
+
                     </a>
+
                 </div>
+
             `;
 
         } else {
 
-            historyContainer.innerHTML = `
+            historyContainer.innerHTML = "";
 
-                <div class="booking-card">
 
-                    <div class="movie">
-                        🎬 ${booking.movie || "Movie"}
-                    </div>
+            bookingHistory.forEach(
+                (booking, index) => {
 
-                    <div class="details">
+                    historyContainer.innerHTML += `
 
-                        <div>
-                            <strong>Theatre:</strong>
-                            ${booking.theatre || "N/A"}
+                        <div class="booking-card">
+
+                            <div class="movie">
+                                🎬 ${booking.movie || "Movie"}
+                            </div>
+
+
+                            <div class="details">
+
+                                <div>
+                                    <strong>
+                                        Theatre:
+                                    </strong>
+                                    ${booking.theatre || "N/A"}
+                                </div>
+
+
+                                <div>
+                                    <strong>
+                                        Date:
+                                    </strong>
+                                    ${booking.date || "N/A"}
+                                </div>
+
+
+                                <div>
+                                    <strong>
+                                        Show:
+                                    </strong>
+                                    ${booking.show || "N/A"}
+                                </div>
+
+
+                                <div>
+                                    <strong>
+                                        Seats:
+                                    </strong>
+                                    ${booking.seats || "N/A"}
+                                </div>
+
+
+                                <div>
+                                    <strong>
+                                        Category:
+                                    </strong>
+                                    ${booking.category || "N/A"}
+                                </div>
+
+
+                                <div>
+                                    <strong>
+                                        Amount:
+                                    </strong>
+
+                                    <span class="amount">
+                                        ₹${booking.finalAmount || booking.total || 0}
+                                    </span>
+                                </div>
+
+                            </div>
+
+
+                            <div class="booking-id">
+
+                                Booking ID:
+
+                                <strong>
+                                    ${booking.bookingId || "N/A"}
+                                </strong>
+
+                            </div>
+
                         </div>
 
-                        <div>
-                            <strong>Date:</strong>
-                            ${booking.date || "N/A"}
-                        </div>
+                    `;
 
-                        <div>
-                            <strong>Show:</strong>
-                            ${booking.show || "N/A"}
-                        </div>
+                }
+            );
 
-                        <div>
-                            <strong>Seats:</strong>
-                            ${booking.seats || "N/A"}
-                        </div>
-
-                        <div>
-                            <strong>Category:</strong>
-                            ${booking.category || "N/A"}
-                        </div>
-
-                        <div>
-                            <strong>Amount:</strong>
-                            ₹${booking.finalAmount || booking.total || 0}
-                        </div>
-
-                    </div>
-
-                </div>
-            `;
         }
 
     </script>
 
 </body>
+
 </html>
