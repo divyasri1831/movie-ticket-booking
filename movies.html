@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Movies - MovieHub</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #0b0b0f;
+            color: white;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 7%;
+            background: #111118;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff3b3b;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+        nav a:hover {
+            color: #ff3b3b;
+        }
+
+        .container {
+            padding: 45px 7%;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .title p {
+            color: #aaa;
+        }
+
+        /* Search */
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            display: flex;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            outline: none;
+            border-radius: 8px 0 0 8px;
+            background: #191922;
+            color: white;
+            font-size: 16px;
+        }
+
+        .search-box button {
+            padding: 15px 25px;
+            border: none;
+            background: #ff3b3b;
+            color: white;
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+        }
+
+        /* Movies */
+        .movies {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 25px;
+        }
+
+        .movie-card {
+            background: #17171f;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #292933;
+            transition: 0.3s;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .poster {
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 70px;
+            background: linear-gradient(135deg, #411111, #17171f);
+        }
+
+        .movie-info {
+            padding: 20px;
+        }
+
+        .movie-info h2 {
+            margin-bottom: 10px;
+        }
+
+        .details {
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .rating {
+            color: #ffd43b;
+            margin-bottom: 15px;
+        }
+
+        .book-btn {
+            display: block;
+            text-align: center;
+            background: #ff3b3b;
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 7px;
+        }
+
+        .book-btn:hover {
+            background: #e52c2c;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+            background: #111118;
+            color: #888;
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                padding: 18px 5%;
+            }
+
+            nav a {
+                margin-left: 10px;
+                font-size: 14px;
+            }
+
+            .title h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">🎬 MovieHub</div>
+
+        <div>
+            <a href="index.html">Home</a>
+            <a href="movies.html">Movies</a>
+            <a href="#">Bookings</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <div class="title">
+            <h1>🎬 Now Showing</h1>
+            <p>Choose your favourite movie and book your seats.</p>
+        </div>
+
+        <div class="search-box">
+            <input type="text" id="search" placeholder="🔍 Search movies...">
+            <button onclick="searchMovies()">Search</button>
+        </div>
+
+        <div class="movies" id="movieList">
+
+            <div class="movie-card">
+                <div class="poster">🎬</div>
+
+                <div class="movie-info">
+                    <h2>Movie One</h2>
+                    <p class="details">Action • 2h 30m</p>
+                    <p class="rating">⭐ 8.7/10</p>
+
+                    <a href="#" class="book-btn">🎟️ Book Now</a>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <div class="poster">🔥</div>
+
+                <div class="movie-info">
+                    <h2>Movie Two</h2>
+                    <p class="details">Thriller • 2h 15m</p>
+                    <p class="rating">⭐ 8.4/10</p>
+
+                    <a href="#" class="book-btn">🎟️ Book Now</a>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <div class="poster">❤️</div>
+
+                <div class="movie-info">
+                    <h2>Love Story</h2>
+                    <p class="details">Romance • 2h 10m</p>
+                    <p class="rating">⭐ 8.2/10</p>
+
+                    <a href="#" class="book-btn">🎟️ Book Now</a>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <div class="poster">😂</div>
+
+                <div class="movie-info">
+                    <h2>Comedy Night</h2>
+                    <p class="details">Comedy • 1h 55m</p>
+                    <p class="rating">⭐ 7.9/10</p>
+
+                    <a href="#" class="book-btn">🎟️ Book Now</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        © 2026 MovieHub | Movie Ticket Booking System
+    </footer>
+
+    <script>
+        function searchMovies() {
+            const input = document.getElementById("search").value.toLowerCase();
+            const movies = document.querySelectorAll(".movie-card");
+
+            movies.forEach(movie => {
+                const name = movie.querySelector("h2").textContent.toLowerCase();
+
+                if (name.includes(input)) {
+                    movie.style.display = "block";
+                } else {
+                    movie.style.display = "none";
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
