@@ -148,7 +148,9 @@
     <div class="container">
 
         <h1>🎟️ Book Your Movie</h1>
-
+        <p id="selectedMovie" style="text-align:center; color:#ff3b3b; font-size:22px; font-weight:bold; margin-bottom:20px;">
+    🎬 Loading movie...
+</p>
         <p class="subtitle">
             Select theatre, date, show time and seat category.
         </p>
@@ -269,7 +271,14 @@
 
 
     <script>
+        const params = new URLSearchParams(window.location.search);
 
+const movieName = params.get("movie");
+
+if (movieName) {
+    document.getElementById("selectedMovie").textContent =
+        "🎬 " + movieName;
+}
         function selectOption(button, group) {
 
             const buttons = document.querySelectorAll(
