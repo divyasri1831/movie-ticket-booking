@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MovieHub - Reviews</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #0b0b0f;
+            color: white;
+            min-height: 100vh;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 7%;
+            background: #111118;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff3b3b;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+        nav a:hover {
+            color: #ff3b3b;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 45px auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .review-box {
+            background: #17171f;
+            border: 1px solid #292933;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #ccc;
+        }
+
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            background: #111118;
+            color: white;
+            border: 1px solid #33333d;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .stars {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .star {
+            font-size: 32px;
+            cursor: pointer;
+            color: #555;
+        }
+
+        .star.selected {
+            color: #ffc107;
+        }
+
+        button {
+            background: #ff3b3b;
+            color: white;
+            border: none;
+            padding: 13px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #e52c2c;
+        }
+
+        .message {
+            margin-top: 15px;
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        .review {
+            background: #17171f;
+            border: 1px solid #292933;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .review h3 {
+            color: #ff3b3b;
+            margin-bottom: 8px;
+        }
+
+        .review .rating {
+            color: #ffc107;
+            margin-bottom: 10px;
+        }
+
+        .review p {
+            color: #ccc;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #777;
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                padding: 18px 5%;
+            }
+
+            nav a {
+                margin-left: 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">🎬 MovieHub</div>
+
+        <div>
+            <a href="index.html">Home</a>
+            <a href="movies.html">Movies</a>
+            <a href="history.html">Bookings</a>
+        </div>
+    </nav>
+
+
+    <div class="container">
+
+        <h1>⭐ Ratings & Reviews</h1>
+
+
+        <div class="review-box">
+
+            <label>Select Movie</label>
+
+            <select id="movie">
+                <option value="Paradise">Paradise</option>
+                <option value="Salaar 2">Salaar 2</option>
+                <option value="Fauzi">Fauzi</option>
+                <option value="Spirit">Spirit</option>
+            </select>
+
+
+            <label>Your Rating</label>
+
+            <div class="stars">
+
+                <span class="star" onclick="setRating(1)">★</span>
+                <span class="star" onclick="setRating(2)">★</span>
+                <span class="star" onclick="setRating(3)">★</span>
+                <span class="star" onclick="setRating(4)">★</span>
+                <span class="star" onclick="setRating(5)">★</span>
+
+            </div>
+
+
+            <label>Your Review</label>
+
+            <textarea
+                id="reviewText"
+                placeholder="Write your review...">
+            </textarea>
+
+
+            <button onclick="submitReview()">
+                Submit Review
+            </button>
+
+            <div id="message" class="message"></div>
+
+        </div>
+
+
+        <h2 style="margin-bottom:20px;">
+            Recent Reviews
+        </h2>
+
+        <div id="reviews"></div>
+
+    </div>
+
+
+    <footer>
+        © 2026 MovieHub | Movie Ticket Booking System
+    </footer>
+
+
+    <script>
+
+        let rating = 0;
+
+
+        function setRating(value) {
+
+            rating = value;
+
+            const stars =
+                document.querySelectorAll(".star");
+
+            stars.forEach((star, index) => {
+
+                if (index < value) {
+                    star.classList.add("selected");
+                } else {
+                    star.classList.remove("selected");
+                }
+
+            });
+
+        }
+
+
+        function submitReview() {
+
+            const movie =
+                document.getElementById("movie").value;
+
+            const reviewText =
+                document.getElementById("reviewText").value.trim();
+
+            const message =
+                document.getElementById("message");
+
+
+            if (rating === 0) {
+
+                message.style.color = "#ff5252";
+                message.textContent =
+                    "Please select a rating.";
+
+                return;
+            }
+
+
+            if (reviewText === "") {
+
+                message.style.color = "#ff5252";
+                message.textContent =
+                    "Please write a review.";
+
+                return;
+            }
+
+
+            const review = {
+                movie: movie,
+                rating: rating,
+                text: reviewText
+            };
+
+
+            let reviews =
+                JSON.parse(
+                    localStorage.getItem("movieHubReviews")
+                ) || [];
+
+
+            reviews.unshift(review);
+
+
+            localStorage.setItem(
+                "movieHubReviews",
+                JSON.stringify(reviews)
+            );
+
+
+            message.style.color = "#4caf50";
+            message.textContent =
+                "✅ Review submitted successfully!";
+
+
+            document.getElementById("reviewText").value = "";
+
+            setRating(0);
+
+            displayReviews();
+
+        }
+
+
+        function displayReviews() {
+
+            const container =
+                document.getElementById("reviews");
+
+            const reviews =
+                JSON.parse(
+                    localStorage.getItem("movieHubReviews")
+                ) || [];
+
+
+            if (reviews.length === 0) {
+
+                container.innerHTML =
+                    "<p style='color:#888;'>No reviews yet.</p>";
+
+                return;
+            }
+
+
+            container.innerHTML = "";
+
+
+            reviews.forEach(review => {
+
+                let stars = "";
+
+                for (let i = 1; i <= 5; i++) {
+
+                    stars +=
+                        i <= review.rating ? "★" : "☆";
+
+                }
+
+
+                container.innerHTML += `
+
+                    <div class="review">
+
+                        <h3>🎬 ${review.movie}</h3>
+
+                        <div class="rating">
+                            ${stars}
+                        </div>
+
+                        <p>
+                            ${review.text}
+                        </p>
+
+                    </div>
+
+                `;
+
+            });
+
+        }
+
+
+        displayReviews();
+
+    </script>
+
+</body>
+</html>
