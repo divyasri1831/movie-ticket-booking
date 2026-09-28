@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="theme.css">
     <script src="theme.js" defer></script>
 
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
     <style>
         * {
             margin: 0;
@@ -56,10 +59,6 @@
             background: #292933;
             color: white;
             cursor: pointer;
-        }
-
-        #themeButton:hover {
-            background: #ff3b3b;
         }
 
         .container {
@@ -117,23 +116,36 @@
             text-align: right;
         }
 
-        .qr {
-            width: 150px;
-            height: 150px;
+        /* QR CODE */
+        .qr-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .qr-section h3 {
+            margin-bottom: 15px;
+        }
+
+        #qrcode {
+            width: 180px;
+            height: 180px;
             background: white;
-            color: black;
-            margin: 30px auto;
+            padding: 10px;
+            margin: auto;
+            border-radius: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 80px;
-            border-radius: 10px;
         }
 
         .booking-id {
             text-align: center;
             color: #aaa;
             margin-bottom: 25px;
+        }
+
+        .booking-id strong {
+            color: white;
         }
 
         .buttons {
@@ -187,6 +199,15 @@
             .movie-name {
                 font-size: 25px;
             }
+
+            .row {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .value {
+                text-align: left;
+            }
         }
 
         @media print {
@@ -208,6 +229,7 @@
             }
         }
     </style>
+
 </head>
 
 <body>
@@ -219,15 +241,35 @@
         </div>
 
         <div>
-            <a href="index.html">Home</a>
-            <a href="movies.html">Movies</a>
-            <a href="history.html">Bookings</a>
-            <a href="reviews.html">⭐ Reviews</a>
-            <a href="offers.html">🎁 Offers</a>
 
-            <button id="themeButton" onclick="toggleTheme()">
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="movies.html">
+                Movies
+            </a>
+
+            <a href="history.html">
+                Bookings
+            </a>
+
+            <a href="reviews.html">
+                ⭐ Reviews
+            </a>
+
+            <a href="offers.html">
+                🎁 Offers
+            </a>
+
+            <button
+                id="themeButton"
+                onclick="toggleTheme()">
+
                 ☀️ Light
+
             </button>
+
         </div>
 
     </nav>
@@ -241,89 +283,139 @@
                 ✅ Booking Confirmed!
             </div>
 
-            <div class="movie-name" id="movie">
+
+            <div
+                class="movie-name"
+                id="movie">
+
                 Movie
+
             </div>
 
 
             <div class="details">
 
                 <div class="row">
+
                     <span class="label">
                         Theatre
                     </span>
 
-                    <span class="value" id="theatre">
+                    <span
+                        class="value"
+                        id="theatre">
+
                         Theatre
+
                     </span>
+
                 </div>
 
 
                 <div class="row">
+
                     <span class="label">
                         Date
                     </span>
 
-                    <span class="value" id="date">
+                    <span
+                        class="value"
+                        id="date">
+
                         Date
+
                     </span>
+
                 </div>
 
 
                 <div class="row">
+
                     <span class="label">
                         Show Time
                     </span>
 
-                    <span class="value" id="show">
+                    <span
+                        class="value"
+                        id="show">
+
                         Show Time
+
                     </span>
+
                 </div>
 
 
                 <div class="row">
+
                     <span class="label">
                         Seats
                     </span>
 
-                    <span class="value" id="seats">
+                    <span
+                        class="value"
+                        id="seats">
+
                         Seats
+
                     </span>
+
                 </div>
 
 
                 <div class="row">
+
                     <span class="label">
                         Category
                     </span>
 
-                    <span class="value" id="category">
+                    <span
+                        class="value"
+                        id="category">
+
                         Category
+
                     </span>
+
                 </div>
 
 
                 <div class="row">
+
                     <span class="label">
                         Amount Paid
                     </span>
 
-                    <span class="value" id="paidAmount">
+                    <span
+                        class="value"
+                        id="paidAmount">
+
                         ₹0
+
                     </span>
+
                 </div>
 
             </div>
 
 
-            <div class="qr">
-                ▦
+            <!-- REAL QR CODE -->
+
+            <div class="qr-section">
+
+                <h3>
+                    📱 Scan Your Ticket
+                </h3>
+
+                <div id="qrcode"></div>
+
             </div>
 
 
             <div class="booking-id">
 
                 Booking ID:
+
                 <strong id="bookingId">
                     MH000000
                 </strong>
@@ -358,36 +450,56 @@
 
 
     <footer>
-        © 2026 MovieHub | Movie Ticket Booking System
+
+        © 2026 MovieHub |
+        Movie Ticket Booking System
+
     </footer>
 
 
     <script>
 
+        /*
+         * Get booking data
+         */
+
         const booking =
             JSON.parse(
-                sessionStorage.getItem("movieHubBooking")
+                sessionStorage.getItem(
+                    "movieHubBooking"
+                )
             ) || {};
 
 
         /*
-         * Generate one booking ID
+         * Generate Booking ID
+         * only once
          */
 
-        const bookingId =
-            "MH" +
-            Math.floor(
-                100000 +
-                Math.random() * 900000
-            );
+        if (!booking.bookingId) {
 
+            booking.bookingId =
+                "MH" +
+                Math.floor(
+                    100000 +
+                    Math.random() * 900000
+                );
 
-        booking.bookingId = bookingId;
+        }
 
 
         /*
-         * Save booking permanently
-         * in booking history
+         * Save updated booking
+         */
+
+        sessionStorage.setItem(
+            "movieHubBooking",
+            JSON.stringify(booking)
+        );
+
+
+        /*
+         * Booking History
          */
 
         let bookingHistory =
@@ -399,24 +511,28 @@
 
 
         /*
-         * Avoid saving the same ticket
-         * multiple times after refresh
+         * Avoid duplicate booking
          */
 
         const alreadySaved =
             bookingHistory.some(
                 item =>
-                    item.bookingId === booking.bookingId
+                    item.bookingId ===
+                    booking.bookingId
             );
 
 
         if (!alreadySaved) {
 
-            bookingHistory.unshift(booking);
+            bookingHistory.unshift(
+                booking
+            );
 
             localStorage.setItem(
                 "movieHubBookingHistory",
-                JSON.stringify(bookingHistory)
+                JSON.stringify(
+                    bookingHistory
+                )
             );
 
         }
@@ -426,31 +542,51 @@
          * Display booking details
          */
 
-        document.getElementById("movie").textContent =
-            booking.movie || "Movie";
+        document.getElementById(
+            "movie"
+        ).textContent =
+            booking.movie ||
+            "Movie";
 
 
-        document.getElementById("theatre").textContent =
-            booking.theatre || "Theatre";
+        document.getElementById(
+            "theatre"
+        ).textContent =
+            booking.theatre ||
+            "Theatre";
 
 
-        document.getElementById("date").textContent =
-            booking.date || "Date";
+        document.getElementById(
+            "date"
+        ).textContent =
+            booking.date ||
+            "Date";
 
 
-        document.getElementById("show").textContent =
-            booking.show || "Show Time";
+        document.getElementById(
+            "show"
+        ).textContent =
+            booking.show ||
+            "Show Time";
 
 
-        document.getElementById("seats").textContent =
-            booking.seats || "No seats";
+        document.getElementById(
+            "seats"
+        ).textContent =
+            booking.seats ||
+            "No seats";
 
 
-        document.getElementById("category").textContent =
-            booking.category || "Regular";
+        document.getElementById(
+            "category"
+        ).textContent =
+            booking.category ||
+            "Regular";
 
 
-        document.getElementById("paidAmount").textContent =
+        document.getElementById(
+            "paidAmount"
+        ).textContent =
             "₹" +
             (
                 booking.finalAmount ||
@@ -459,9 +595,50 @@
             );
 
 
-        document.getElementById("bookingId").textContent =
+        document.getElementById(
+            "bookingId"
+        ).textContent =
             booking.bookingId;
 
+
+        /*
+         * QR DATA
+         */
+
+        const qrData =
+            `
+MovieHub Ticket
+----------------
+Movie: ${booking.movie || "Movie"}
+Theatre: ${booking.theatre || "Theatre"}
+Date: ${booking.date || "Date"}
+Show: ${booking.show || "Show Time"}
+Seats: ${booking.seats || "No seats"}
+Category: ${booking.category || "Regular"}
+Amount: ₹${booking.finalAmount || booking.total || 0}
+Booking ID: ${booking.bookingId}
+            `;
+
+
+        /*
+         * Generate QR Code
+         */
+
+        new QRCode(
+            document.getElementById(
+                "qrcode"
+            ),
+            {
+                text: qrData,
+                width: 160,
+                height: 160
+            }
+        );
+
+
+        /*
+         * Home button
+         */
 
         function goHome() {
 
