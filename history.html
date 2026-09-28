@@ -102,6 +102,26 @@
             color: #aaa;
         }
 
+        .amount {
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        .cancel-btn {
+            margin-top: 20px;
+            background: #ff3b3b;
+            color: white;
+            border: none;
+            padding: 11px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .cancel-btn:hover {
+            background: #d92929;
+        }
+
         .empty {
             text-align: center;
             color: #999;
@@ -118,9 +138,14 @@
             border-radius: 8px;
         }
 
-        .amount {
+        .success-message {
+            text-align: center;
+            background: #173b20;
             color: #4caf50;
-            font-weight: bold;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
         }
 
         footer {
@@ -147,6 +172,7 @@
             }
         }
     </style>
+
 </head>
 
 <body>
@@ -158,15 +184,35 @@
         </div>
 
         <div>
-            <a href="index.html">Home</a>
-            <a href="movies.html">Movies</a>
-            <a href="history.html">Bookings</a>
-            <a href="reviews.html">⭐ Reviews</a>
-            <a href="offers.html">🎁 Offers</a>
 
-            <button id="themeButton" onclick="toggleTheme()">
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="movies.html">
+                Movies
+            </a>
+
+            <a href="history.html">
+                Bookings
+            </a>
+
+            <a href="reviews.html">
+                ⭐ Reviews
+            </a>
+
+            <a href="offers.html">
+                🎁 Offers
+            </a>
+
+            <button
+                id="themeButton"
+                onclick="toggleTheme()">
+
                 ☀️ Light
+
             </button>
+
         </div>
 
     </nav>
@@ -174,7 +220,19 @@
 
     <div class="container">
 
-        <h1>🎟️ Booking History</h1>
+        <h1>
+            🎟️ Booking History
+        </h1>
+
+
+        <div
+            id="successMessage"
+            class="success-message">
+
+            ✅ Booking cancelled successfully!
+
+        </div>
+
 
         <div id="history"></div>
 
@@ -182,52 +240,62 @@
 
 
     <footer>
-        © 2026 MovieHub | Movie Ticket Booking System
+
+        © 2026 MovieHub |
+        Movie Ticket Booking System
+
     </footer>
 
 
     <script>
 
-        const historyContainer =
-            document.getElementById("history");
+        function displayHistory() {
+
+            const historyContainer =
+                document.getElementById(
+                    "history"
+                );
 
 
-        const bookingHistory =
-            JSON.parse(
-                localStorage.getItem(
-                    "movieHubBookingHistory"
-                )
-            ) || [];
+            const bookingHistory =
+                JSON.parse(
+                    localStorage.getItem(
+                        "movieHubBookingHistory"
+                    )
+                ) || [];
 
 
-        if (bookingHistory.length === 0) {
+            if (bookingHistory.length === 0) {
 
-            historyContainer.innerHTML = `
+                historyContainer.innerHTML = `
 
-                <div class="empty">
+                    <div class="empty">
 
-                    <h2>
-                        No bookings yet 🎬
-                    </h2>
+                        <h2>
+                            No bookings yet 🎬
+                        </h2>
 
-                    <p>
-                        Book a movie to see your
-                        booking history here.
-                    </p>
+                        <p>
+                            Book a movie to see your
+                            booking history here.
+                        </p>
 
-                    <a
-                        href="movies.html"
-                        class="btn">
+                        <a
+                            href="movies.html"
+                            class="btn">
 
-                        Browse Movies
+                            Browse Movies
 
-                    </a>
+                        </a>
 
-                </div>
+                    </div>
 
-            `;
+                `;
 
-        } else {
+                return;
+
+            }
+
 
             historyContainer.innerHTML = "";
 
@@ -240,60 +308,82 @@
                         <div class="booking-card">
 
                             <div class="movie">
-                                🎬 ${booking.movie || "Movie"}
+
+                                🎬
+                                ${booking.movie || "Movie"}
+
                             </div>
 
 
                             <div class="details">
 
                                 <div>
+
                                     <strong>
                                         Theatre:
                                     </strong>
+
                                     ${booking.theatre || "N/A"}
+
                                 </div>
 
 
                                 <div>
+
                                     <strong>
                                         Date:
                                     </strong>
+
                                     ${booking.date || "N/A"}
+
                                 </div>
 
 
                                 <div>
+
                                     <strong>
                                         Show:
                                     </strong>
+
                                     ${booking.show || "N/A"}
+
                                 </div>
 
 
                                 <div>
+
                                     <strong>
                                         Seats:
                                     </strong>
+
                                     ${booking.seats || "N/A"}
+
                                 </div>
 
 
                                 <div>
+
                                     <strong>
                                         Category:
                                     </strong>
+
                                     ${booking.category || "N/A"}
+
                                 </div>
 
 
                                 <div>
+
                                     <strong>
                                         Amount:
                                     </strong>
 
                                     <span class="amount">
+
                                         ₹${booking.finalAmount || booking.total || 0}
+
                                     </span>
+
                                 </div>
 
                             </div>
@@ -304,10 +394,21 @@
                                 Booking ID:
 
                                 <strong>
+
                                     ${booking.bookingId || "N/A"}
+
                                 </strong>
 
                             </div>
+
+
+                            <button
+                                class="cancel-btn"
+                                onclick="cancelBooking(${index})">
+
+                                ❌ Cancel Booking
+
+                            </button>
 
                         </div>
 
@@ -317,6 +418,65 @@
             );
 
         }
+
+
+        function cancelBooking(index) {
+
+            const confirmCancel =
+                confirm(
+                    "Are you sure you want to cancel this booking?"
+                );
+
+
+            if (!confirmCancel) {
+
+                return;
+
+            }
+
+
+            let bookingHistory =
+                JSON.parse(
+                    localStorage.getItem(
+                        "movieHubBookingHistory"
+                    )
+                ) || [];
+
+
+            bookingHistory.splice(
+                index,
+                1
+            );
+
+
+            localStorage.setItem(
+                "movieHubBookingHistory",
+                JSON.stringify(
+                    bookingHistory
+                )
+            );
+
+
+            document.getElementById(
+                "successMessage"
+            ).style.display = "block";
+
+
+            displayHistory();
+
+
+            setTimeout(() => {
+
+                document.getElementById(
+                    "successMessage"
+                ).style.display = "none";
+
+            }, 3000);
+
+        }
+
+
+        displayHistory();
 
     </script>
 
