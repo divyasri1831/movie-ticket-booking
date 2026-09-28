@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>MovieHub - Digital Ticket</title>
+
+    <link rel="stylesheet" href="theme.css">
+    <script src="theme.js" defer></script>
 
     <style>
         * {
@@ -37,11 +41,25 @@
         nav a {
             color: white;
             text-decoration: none;
-            margin-left: 25px;
+            margin-left: 18px;
         }
 
         nav a:hover {
             color: #ff3b3b;
+        }
+
+        #themeButton {
+            margin-left: 18px;
+            padding: 8px 14px;
+            border: none;
+            border-radius: 8px;
+            background: #292933;
+            color: white;
+            cursor: pointer;
+        }
+
+        #themeButton:hover {
+            background: #ff3b3b;
         }
 
         .container {
@@ -55,7 +73,6 @@
             border: 1px solid #292933;
             border-radius: 18px;
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
 
         .success {
@@ -126,7 +143,7 @@
             flex-wrap: wrap;
         }
 
-        button {
+        button.action {
             background: #ff3b3b;
             color: white;
             border: none;
@@ -136,16 +153,12 @@
             cursor: pointer;
         }
 
-        button:hover {
+        button.action:hover {
             background: #e52c2c;
         }
 
-        .home-btn {
+        button.home-btn {
             background: #292933;
-        }
-
-        .home-btn:hover {
-            background: #3a3a46;
         }
 
         footer {
@@ -154,14 +167,17 @@
             color: #777;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 700px) {
+
             nav {
                 padding: 18px 5%;
+                flex-direction: column;
+                gap: 15px;
             }
 
             nav a {
-                margin-left: 10px;
-                font-size: 14px;
+                margin-left: 8px;
+                font-size: 13px;
             }
 
             .ticket {
@@ -174,6 +190,7 @@
         }
 
         @media print {
+
             nav,
             .buttons,
             footer {
@@ -190,41 +207,31 @@
                 border: 1px solid #ccc;
             }
         }
-        #themeButton {
-    margin-left: 20px;
-    padding: 8px 14px;
-    border: none;
-    border-radius: 8px;
-    background: #292933;
-    color: white;
-    cursor: pointer;
-}
-
-#themeButton:hover {
-    background: #ff3b3b;
-}
     </style>
-    <link rel="stylesheet" href="theme.css">
-<script src="theme.js" defer></script>
 </head>
 
 <body>
 
     <nav>
-        <div class="logo">🎬 MovieHub</div>
+
+        <div class="logo">
+            🎬 MovieHub
+        </div>
 
         <div>
-    <a href="index.html">Home</a>
-    <a href="movies.html">Movies</a>
-    <a href="history.html">Bookings</a>
-    <a href="reviews.html">⭐ Reviews</a>
-    <a href="offers.html">🎁 Offers</a>
+            <a href="index.html">Home</a>
+            <a href="movies.html">Movies</a>
+            <a href="history.html">Bookings</a>
+            <a href="reviews.html">⭐ Reviews</a>
+            <a href="offers.html">🎁 Offers</a>
 
-    <button id="themeButton" onclick="toggleTheme()">
-        ☀️ Light
-    </button>
-</div>
+            <button id="themeButton" onclick="toggleTheme()">
+                ☀️ Light
+            </button>
+        </div>
+
     </nav>
+
 
     <div class="container">
 
@@ -238,38 +245,69 @@
                 Movie
             </div>
 
+
             <div class="details">
 
                 <div class="row">
-                    <span class="label">Theatre</span>
+                    <span class="label">
+                        Theatre
+                    </span>
+
                     <span class="value" id="theatre">
                         Theatre
                     </span>
                 </div>
 
+
                 <div class="row">
-                    <span class="label">Date</span>
+                    <span class="label">
+                        Date
+                    </span>
+
                     <span class="value" id="date">
                         Date
                     </span>
                 </div>
 
+
                 <div class="row">
-                    <span class="label">Show Time</span>
+                    <span class="label">
+                        Show Time
+                    </span>
+
                     <span class="value" id="show">
                         Show Time
                     </span>
                 </div>
 
+
                 <div class="row">
-                    <span class="label">Seats</span>
+                    <span class="label">
+                        Seats
+                    </span>
+
                     <span class="value" id="seats">
                         Seats
                     </span>
                 </div>
 
+
                 <div class="row">
-                    <span class="label">Amount Paid</span>
+                    <span class="label">
+                        Category
+                    </span>
+
+                    <span class="value" id="category">
+                        Category
+                    </span>
+                </div>
+
+
+                <div class="row">
+                    <span class="label">
+                        Amount Paid
+                    </span>
+
                     <span class="value" id="paidAmount">
                         ₹0
                     </span>
@@ -277,23 +315,39 @@
 
             </div>
 
+
             <div class="qr">
                 ▦
             </div>
 
+
             <div class="booking-id">
+
                 Booking ID:
-                <strong id="bookingId">MH000000</strong>
+                <strong id="bookingId">
+                    MH000000
+                </strong>
+
             </div>
+
 
             <div class="buttons">
 
-                <button onclick="window.print()">
+                <button
+                    class="action"
+                    onclick="window.print()">
+
                     🖨️ Print Ticket
+
                 </button>
 
-                <button class="home-btn" onclick="goHome()">
+
+                <button
+                    class="action home-btn"
+                    onclick="goHome()">
+
                     🏠 Back to Home
+
                 </button>
 
             </div>
@@ -302,6 +356,7 @@
 
     </div>
 
+
     <footer>
         © 2026 MovieHub | Movie Ticket Booking System
     </footer>
@@ -309,10 +364,67 @@
 
     <script>
 
-        const booking = JSON.parse(
-            sessionStorage.getItem("movieHubBooking")
-        ) || {};
+        const booking =
+            JSON.parse(
+                sessionStorage.getItem("movieHubBooking")
+            ) || {};
 
+
+        /*
+         * Generate one booking ID
+         */
+
+        const bookingId =
+            "MH" +
+            Math.floor(
+                100000 +
+                Math.random() * 900000
+            );
+
+
+        booking.bookingId = bookingId;
+
+
+        /*
+         * Save booking permanently
+         * in booking history
+         */
+
+        let bookingHistory =
+            JSON.parse(
+                localStorage.getItem(
+                    "movieHubBookingHistory"
+                )
+            ) || [];
+
+
+        /*
+         * Avoid saving the same ticket
+         * multiple times after refresh
+         */
+
+        const alreadySaved =
+            bookingHistory.some(
+                item =>
+                    item.bookingId === booking.bookingId
+            );
+
+
+        if (!alreadySaved) {
+
+            bookingHistory.unshift(booking);
+
+            localStorage.setItem(
+                "movieHubBookingHistory",
+                JSON.stringify(bookingHistory)
+            );
+
+        }
+
+
+        /*
+         * Display booking details
+         */
 
         document.getElementById("movie").textContent =
             booking.movie || "Movie";
@@ -334,30 +446,32 @@
             booking.seats || "No seats";
 
 
+        document.getElementById("category").textContent =
+            booking.category || "Regular";
+
+
         document.getElementById("paidAmount").textContent =
-            "₹" + (booking.finalAmount || booking.total || 0);
+            "₹" +
+            (
+                booking.finalAmount ||
+                booking.total ||
+                0
+            );
 
 
-        function generateBookingId() {
-
-            const number =
-                Math.floor(100000 + Math.random() * 900000);
-
-            document.getElementById("bookingId").textContent =
-                "MH" + number;
-        }
+        document.getElementById("bookingId").textContent =
+            booking.bookingId;
 
 
         function goHome() {
 
-            window.location.href = "index.html";
+            window.location.href =
+                "index.html";
 
         }
-
-
-        generateBookingId();
 
     </script>
 
 </body>
+
 </html>
