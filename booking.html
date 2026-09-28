@@ -237,27 +237,27 @@
 
             <div class="categories">
 
-                <button class="option" onclick="selectOption(this, 'category')">
+                <button class="option category-option" onclick="selectOption(this, 'category')">
                     💺 Regular
                 </button>
 
-                <button class="option" onclick="selectOption(this, 'category')">
+                <button class="option category-option" onclick="selectOption(this, 'category')">
                     👫 Couple
                 </button>
 
-                <button class="option" onclick="selectOption(this, 'category')">
+                <button class="option category-option" onclick="selectOption(this, 'category')">
                     🧑‍🎓 Youngsters
                 </button>
 
-                <button class="option" onclick="selectOption(this, 'category')">
+                <button class="option category-option" onclick="selectOption(this, 'category')">
                     👨‍👩‍👧 Family
                 </button>
 
-                <button class="option" onclick="selectOption(this, 'category')">
+                <button class="option category-option" onclick="selectOption(this, 'category')">
                     👴 Senior-friendly
                 </button>
 
-                <button class="option" onclick="selectOption(this, 'category')">
+                <button class="option category-option" onclick="selectOption(this, 'category')">
                     💎 Premium
                 </button>
 
@@ -285,34 +285,39 @@ if (movieName) {
     document.getElementById("selectedMovie").textContent =
         "🎬 " + movieName;
 }
-        function selectOption(button, group) {
+       function selectOption(button, group) {
+    const buttons = document.querySelectorAll("." + group + " .option");
 
-            const buttons = document.querySelectorAll(
-                "." + group + " .option"
-            );
+    buttons.forEach(item => {
+        item.classList.remove("selected");
+    });
 
-            button.classList.add("selected");
+    button.classList.add("selected");
+}
 
-        }
+function continueBooking() {
+    const theatre = document.getElementById("theatre").value;
+    const date = document.querySelector(".date-option.selected");
+    const show = document.querySelector(".show-option.selected");
+    const category = document.querySelector(".category-option.selected");
 
+    if (!theatre || !date || !show || !category) {
+        alert("Please select theatre, date, show time and seat category.");
+        return;
+    }
 
-        function continueBooking() {
+    const booking = {
+        movie: movieName || "Unknown Movie",
+        theatre: theatre,
+        date: date.textContent,
+        show: show.textContent,
+        category: category.textContent
+    };
 
-            const theatre = document.getElementById("theatre").value;
+    sessionStorage.setItem("movieHubBooking", JSON.stringify(booking));
 
-            const selected = document.querySelectorAll(".selected");
-
-            if (theatre === "" || selected.length < 3) {
-
-                alert("Please select theatre, date, show time and seat category.");
-
-                return;
-            }
-
-            window.location.href = "seats.html";
-
-        }
-
+    window.location.href = "seats.html";
+}
     </script>
 
 </body>
