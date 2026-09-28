@@ -190,7 +190,22 @@
                 border: 1px solid #ccc;
             }
         }
+        #themeButton {
+    margin-left: 20px;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    background: #292933;
+    color: white;
+    cursor: pointer;
+}
+
+#themeButton:hover {
+    background: #ff3b3b;
+}
     </style>
+    <link rel="stylesheet" href="theme.css">
+<script src="theme.js" defer></script>
 </head>
 
 <body>
@@ -199,10 +214,16 @@
         <div class="logo">🎬 MovieHub</div>
 
         <div>
-            <a href="index.html">Home</a>
-            <a href="movies.html">Movies</a>
-            <a href="booking.html">Bookings</a>
-        </div>
+    <a href="index.html">Home</a>
+    <a href="movies.html">Movies</a>
+    <a href="history.html">Bookings</a>
+    <a href="reviews.html">⭐ Reviews</a>
+    <a href="offers.html">🎁 Offers</a>
+
+    <button id="themeButton" onclick="toggleTheme()">
+        ☀️ Light
+    </button>
+</div>
     </nav>
 
     <div class="container">
