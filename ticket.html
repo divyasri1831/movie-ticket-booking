@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="theme.css">
     <script src="theme.js" defer></script>
 
-    <!-- QR Code Library -->
-<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -115,7 +113,8 @@
             text-align: right;
         }
 
-        /* QR CODE */
+        /* QR SECTION */
+
         .qr-section {
             text-align: center;
             margin: 30px 0;
@@ -126,15 +125,21 @@
         }
 
         #qrcode {
-            width: 180px;
-            height: 180px;
+            width: 200px;
+            height: 200px;
             background: white;
             padding: 10px;
             margin: auto;
-            border-radius: 10px;
+            border-radius: 12px;
+
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+
+        #qrcode img {
+            width: 180px;
+            height: 180px;
         }
 
         .booking-id {
@@ -241,25 +246,15 @@
 
         <div>
 
-            <a href="index.html">
-                Home
-            </a>
+            <a href="index.html">Home</a>
 
-            <a href="movies.html">
-                Movies
-            </a>
+            <a href="movies.html">Movies</a>
 
-            <a href="history.html">
-                Bookings
-            </a>
+            <a href="history.html">Bookings</a>
 
-            <a href="reviews.html">
-                ⭐ Reviews
-            </a>
+            <a href="reviews.html">⭐ Reviews</a>
 
-            <a href="offers.html">
-                🎁 Offers
-            </a>
+            <a href="offers.html">🎁 Offers</a>
 
             <button
                 id="themeButton"
@@ -398,7 +393,7 @@
             </div>
 
 
-            <!-- REAL QR CODE -->
+            <!-- ACTUAL QR CODE -->
 
             <div class="qr-section">
 
@@ -406,7 +401,8 @@
                     📱 Scan Your Ticket
                 </h3>
 
-                <div id="qrcode"></div>
+                <div id="qrcode">
+                </div>
 
             </div>
 
@@ -459,7 +455,7 @@
     <script>
 
         /*
-         * Get booking data
+         * GET BOOKING DATA
          */
 
         const booking =
@@ -471,8 +467,8 @@
 
 
         /*
-         * Generate Booking ID
-         * only once
+         * GENERATE BOOKING ID
+         * ONLY ONCE
          */
 
         if (!booking.bookingId) {
@@ -488,7 +484,7 @@
 
 
         /*
-         * Save updated booking
+         * SAVE BOOKING
          */
 
         sessionStorage.setItem(
@@ -498,7 +494,7 @@
 
 
         /*
-         * Booking History
+         * BOOKING HISTORY
          */
 
         let bookingHistory =
@@ -508,10 +504,6 @@
                 )
             ) || [];
 
-
-        /*
-         * Avoid duplicate booking
-         */
 
         const alreadySaved =
             bookingHistory.some(
@@ -538,60 +530,55 @@
 
 
         /*
-         * Display booking details
+         * DISPLAY BOOKING
          */
 
         document.getElementById(
             "movie"
         ).textContent =
-            booking.movie ||
-            "Movie";
+            booking.movie || "Movie";
 
 
         document.getElementById(
             "theatre"
         ).textContent =
-            booking.theatre ||
-            "Theatre";
+            booking.theatre || "Theatre";
 
 
         document.getElementById(
             "date"
         ).textContent =
-            booking.date ||
-            "Date";
+            booking.date || "Date";
 
 
         document.getElementById(
             "show"
         ).textContent =
-            booking.show ||
-            "Show Time";
+            booking.show || "Show Time";
 
 
         document.getElementById(
             "seats"
         ).textContent =
-            booking.seats ||
-            "No seats";
+            booking.seats || "No seats";
 
 
         document.getElementById(
             "category"
         ).textContent =
-            booking.category ||
-            "Regular";
+            booking.category || "Regular";
+
+
+        const paidAmount =
+            booking.finalAmount ||
+            booking.total ||
+            0;
 
 
         document.getElementById(
             "paidAmount"
         ).textContent =
-            "₹" +
-            (
-                booking.finalAmount ||
-                booking.total ||
-                0
-            );
+            "₹" + paidAmount;
 
 
         document.getElementById(
@@ -605,38 +592,47 @@
          */
 
         const qrData =
-            `
-MovieHub Ticket
-----------------
-Movie: ${booking.movie || "Movie"}
-Theatre: ${booking.theatre || "Theatre"}
-Date: ${booking.date || "Date"}
-Show: ${booking.show || "Show Time"}
-Seats: ${booking.seats || "No seats"}
-Category: ${booking.category || "Regular"}
-Amount: ₹${booking.finalAmount || booking.total || 0}
-Booking ID: ${booking.bookingId}
-            `;
+            "MovieHub Ticket | " +
+            "Movie: " +
+            (booking.movie || "Movie") +
+            " | Theatre: " +
+            (booking.theatre || "Theatre") +
+            " | Date: " +
+            (booking.date || "Date") +
+            " | Show: " +
+            (booking.show || "Show") +
+            " | Seats: " +
+            (booking.seats || "None") +
+            " | Category: " +
+            (booking.category || "Regular") +
+            " | Amount: ₹" +
+            paidAmount +
+            " | Booking ID: " +
+            booking.bookingId;
 
 
         /*
-         * Generate QR Code
+         * CREATE ACTUAL QR IMAGE
          */
 
-        new QRCode(
-            document.getElementById(
-                "qrcode"
-            ),
-            {
-                text: qrData,
-                width: 160,
-                height: 160
-            }
-        );
+        const qrImage =
+            document.createElement("img");
+
+        qrImage.alt =
+            "MovieHub Ticket QR Code";
+
+        qrImage.src =
+            "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=" +
+            encodeURIComponent(qrData);
+
+
+        document.getElementById(
+            "qrcode"
+        ).appendChild(qrImage);
 
 
         /*
-         * Home button
+         * HOME
          */
 
         function goHome() {
