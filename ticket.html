@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MovieHub - Digital Ticket</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #0b0b0f;
+            color: white;
+        }
+
+        nav {
+            padding: 20px 7%;
+            background: #111118;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff3b3b;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        .success {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .success-icon {
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+
+        .success h1 {
+            color: #4caf50;
+            margin-bottom: 8px;
+        }
+
+        .success p {
+            color: #aaa;
+        }
+
+        .ticket {
+            background: white;
+            color: #111;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.5);
+        }
+
+        .ticket-header {
+            background: #ff3b3b;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .ticket-header h2 {
+            margin-bottom: 8px;
+        }
+
+        .ticket-body {
+            padding: 25px;
+        }
+
+        .movie-name {
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .detail {
+            padding: 12px;
+            background: #f3f3f3;
+            border-radius: 8px;
+        }
+
+        .detail small {
+            display: block;
+            color: #777;
+            margin-bottom: 5px;
+        }
+
+        .detail strong {
+            font-size: 15px;
+        }
+
+        .qr {
+            text-align: center;
+            margin: 25px 0;
+            padding: 20px;
+            border-top: 2px dashed #ccc;
+            border-bottom: 2px dashed #ccc;
+        }
+
+        .qr-box {
+            width: 150px;
+            height: 150px;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 90px;
+            background: #111;
+            color: white;
+        }
+
+        .booking-id {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .amount {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #ff3b3b;
+            margin-top: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .home-btn {
+            background: #ff3b3b;
+            color: white;
+        }
+
+        .print-btn {
+            background: #222;
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            margin-top: 30px;
+            background: #111118;
+            color: #888;
+        }
+
+        @media print {
+
+            body {
+                background: white;
+            }
+
+            nav,
+            footer,
+            .buttons {
+                display: none;
+            }
+
+            .container {
+                padding: 0;
+            }
+
+            .success {
+                color: black;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .details {
+                grid-template-columns: 1fr;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">🎬 MovieHub</div>
+    </nav>
+
+    <div class="container">
+
+        <div class="success">
+
+            <div class="success-icon">
+                ✅
+            </div>
+
+            <h1>Booking Confirmed!</h1>
+
+            <p>Your movie ticket has been booked successfully.</p>
+
+        </div>
+
+
+        <div class="ticket">
+
+            <div class="ticket-header">
+
+                <h2>🎟️ MOVIE TICKET</h2>
+
+                <p>MovieHub</p>
+
+            </div>
+
+
+            <div class="ticket-body">
+
+                <div class="movie-name">
+                    🎬 Movie One
+                </div>
+
+
+                <div class="details">
+
+                    <div class="detail">
+
+                        <small>📍 Theatre</small>
+
+                        <strong>
+                            MovieHub Cinemas
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail">
+
+                        <small>📅 Date</small>
+
+                        <strong>
+                            28 Sep 2026
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail">
+
+                        <small>🕐 Show Time</small>
+
+                        <strong>
+                            6:00 PM
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail">
+
+                        <small>💺 Seats</small>
+
+                        <strong>
+                            A1, A2
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="qr">
+
+                    <div class="qr-box">
+                        ▦
+                    </div>
+
+                    <p style="margin-top:10px;">
+                        Scan at theatre entrance
+                    </p>
+
+                </div>
+
+
+                <div class="booking-id">
+
+                    Booking ID:
+                    <span id="bookingId"></span>
+
+                </div>
+
+
+                <div class="amount">
+
+                    Paid: ₹360
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="buttons">
+
+            <button
+                class="btn print-btn"
+                onclick="window.print()"
+            >
+                🖨️ Print Ticket
+            </button>
+
+            <button
+                class="btn home-btn"
+                onclick="goHome()"
+            >
+                🏠 Back to Home
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <footer>
+        © 2026 MovieHub | Movie Ticket Booking System
+    </footer>
+
+
+    <script>
+
+        function generateBookingId() {
+
+            const number =
+                Math.floor(100000 + Math.random() * 900000);
+
+            document.getElementById("bookingId")
+                .textContent = "MH" + number;
+
+        }
+
+        function goHome() {
+
+            window.location.href = "index.html";
+
+        }
+
+        generateBookingId();
+
+    </script>
+
+</body>
+</html>
