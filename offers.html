@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MovieHub - Offers</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #0b0b0f;
+            color: white;
+            min-height: 100vh;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 7%;
+            background: #111118;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff3b3b;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        nav a:hover {
+            color: #ff3b3b;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 45px auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .offers {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .offer {
+            background: #17171f;
+            border: 1px solid #292933;
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .offer-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .offer h2 {
+            color: #ff3b3b;
+            margin-bottom: 10px;
+        }
+
+        .offer p {
+            color: #bbb;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .coupon {
+            display: inline-block;
+            background: #292933;
+            border: 1px dashed #ff3b3b;
+            padding: 10px 18px;
+            border-radius: 8px;
+            color: #ffc107;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .note {
+            text-align: center;
+            color: #888;
+            margin-top: 30px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #777;
+        }
+
+        @media (max-width: 700px) {
+
+            .offers {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                padding: 18px 5%;
+            }
+
+            nav a {
+                margin-left: 8px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+
+        <div class="logo">
+            🎬 MovieHub
+        </div>
+
+        <div>
+            <a href="index.html">Home</a>
+            <a href="movies.html">Movies</a>
+            <a href="history.html">Bookings</a>
+            <a href="reviews.html">Reviews</a>
+            <a href="offers.html">Offers</a>
+        </div>
+
+    </nav>
+
+
+    <div class="container">
+
+        <h1>🎁 Special Offers & Coupons</h1>
+
+
+        <div class="offers">
+
+
+            <div class="offer">
+
+                <div class="offer-icon">
+                    🎟️
+                </div>
+
+                <h2>Movie Special</h2>
+
+                <p>
+                    Get ₹50 off on your movie ticket booking.
+                </p>
+
+                <div class="coupon">
+                    MOVIE50
+                </div>
+
+            </div>
+
+
+            <div class="offer">
+
+                <div class="offer-icon">
+                    👨‍👩‍👧‍👦
+                </div>
+
+                <h2>Family Offer</h2>
+
+                <p>
+                    Special discount available for family
+                    bookings.
+                </p>
+
+                <div class="coupon">
+                    FAMILY10
+                </div>
+
+            </div>
+
+
+            <div class="offer">
+
+                <div class="offer-icon">
+                    🎓
+                </div>
+
+                <h2>Youngsters Offer</h2>
+
+                <p>
+                    Enjoy special savings on selected
+                    youngsters seat categories.
+                </p>
+
+                <div class="coupon">
+                    YOUTH20
+                </div>
+
+            </div>
+
+
+            <div class="offer">
+
+                <div class="offer-icon">
+                    ⭐
+                </div>
+
+                <h2>Premium Experience</h2>
+
+                <p>
+                    Unlock special benefits when choosing
+                    premium seats.
+                </p>
+
+                <div class="coupon">
+                    PREMIUM
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="note">
+            💡 Enter a valid coupon code during payment
+            to apply the available discount.
+        </div>
+
+    </div>
+
+
+    <footer>
+        © 2026 MovieHub | Movie Ticket Booking System
+    </footer>
+
+</body>
+</html>
