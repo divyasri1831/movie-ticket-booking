@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MovieHub - Select Show</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #0b0b0f;
+            color: white;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 7%;
+            background: #111118;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff3b3b;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+        nav a:hover {
+            color: #ff3b3b;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 45px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #aaa;
+            margin-bottom: 35px;
+        }
+
+        .section {
+            background: #17171f;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 1px solid #292933;
+        }
+
+        .section h2 {
+            margin-bottom: 20px;
+            color: #ff3b3b;
+        }
+
+        select {
+            width: 100%;
+            padding: 14px;
+            background: #0f0f15;
+            color: white;
+            border: 1px solid #444;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .dates,
+        .shows,
+        .categories {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .option {
+            background: #22222c;
+            border: 1px solid #444;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            border-color: #ff3b3b;
+        }
+
+        .option.selected {
+            background: #ff3b3b;
+            border-color: #ff3b3b;
+        }
+
+        .continue {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: #ff3b3b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        .continue:hover {
+            background: #e52c2c;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #111118;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">🎬 MovieHub</div>
+
+        <div>
+            <a href="index.html">Home</a>
+            <a href="movies.html">Movies</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <h1>🎟️ Book Your Movie</h1>
+
+        <p class="subtitle">
+            Select theatre, date, show time and seat category.
+        </p>
+
+        <!-- Theatre -->
+        <div class="section">
+
+            <h2>📍 Select Theatre</h2>
+
+            <select id="theatre">
+                <option value="">-- Choose Theatre --</option>
+                <option>MovieHub Cinemas - Tirupati</option>
+                <option>PVR Cinemas</option>
+                <option>INOX Cinemas</option>
+                <option>AAA Cinemas</option>
+            </select>
+
+        </div>
+
+        <!-- Date -->
+        <div class="section">
+
+            <h2>📅 Select Date</h2>
+
+            <div class="dates">
+
+                <button class="option" onclick="selectOption(this, 'date')">
+                    Today
+                </button>
+
+                <button class="option" onclick="selectOption(this, 'date')">
+                    Tomorrow
+                </button>
+
+                <button class="option" onclick="selectOption(this, 'date')">
+                    30 Sep
+                </button>
+
+                <button class="option" onclick="selectOption(this, 'date')">
+                    1 Oct
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Show Time -->
+        <div class="section">
+
+            <h2>🕐 Select Show Time</h2>
+
+            <div class="shows">
+
+                <button class="option" onclick="selectOption(this, 'show')">
+                    10:00 AM
+                </button>
+
+                <button class="option" onclick="selectOption(this, 'show')">
+                    1:30 PM
+                </button>
+
+                <button class="option" onclick="selectOption(this, 'show')">
+                    6:00 PM
+                </button>
+
+                <button class="option" onclick="selectOption(this, 'show')">
+                    9:30 PM
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Seat Category -->
+        <div class="section">
+
+            <h2>💺 Seat Preference</h2>
+
+            <div class="categories">
+
+                <button class="option" onclick="selectOption(this, 'category')">
+                    💺 Regular
+                </button>
+
+                <button class="option" onclick="selectOption(this, 'category')">
+                    👫 Couple
+                </button>
+
+                <button class="option" onclick="selectOption(this, 'category')">
+                    🧑‍🎓 Youngsters
+                </button>
+
+                <button class="option" onclick="selectOption(this, 'category')">
+                    👨‍👩‍👧 Family
+                </button>
+
+                <button class="option" onclick="selectOption(this, 'category')">
+                    👴 Senior-friendly
+                </button>
+
+                <button class="option" onclick="selectOption(this, 'category')">
+                    💎 Premium
+                </button>
+
+            </div>
+
+        </div>
+
+        <button class="continue" onclick="continueBooking()">
+            Continue to Seat Selection ➡️
+        </button>
+
+    </div>
+
+    <footer>
+        © 2026 MovieHub | Movie Ticket Booking System
+    </footer>
+
+
+    <script>
+
+        function selectOption(button, group) {
+
+            const buttons = document.querySelectorAll(
+                "." + group + " .option"
+            );
+
+            button.classList.add("selected");
+
+        }
+
+
+        function continueBooking() {
+
+            const theatre = document.getElementById("theatre").value;
+
+            const selected = document.querySelectorAll(".selected");
+
+            if (theatre === "" || selected.length < 3) {
+
+                alert("Please select theatre, date, show time and seat category.");
+
+                return;
+            }
+
+            window.location.href = "seats.html";
+
+        }
+
+    </script>
+
+</body>
+</html>
