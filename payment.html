@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MovieHub - Payment</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #0b0b0f;
+            color: white;
+        }
+
+        nav {
+            padding: 20px 7%;
+            background: #111118;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff3b3b;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: #17171f;
+            border: 1px solid #292933;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            color: #ff3b3b;
+            margin-bottom: 20px;
+        }
+
+        .summary p {
+            margin: 12px 0;
+            color: #ccc;
+        }
+
+        .total {
+            font-size: 24px;
+            color: #ff3b3b !important;
+            font-weight: bold;
+            margin-top: 20px !important;
+        }
+
+        .coupon {
+            display: flex;
+            gap: 10px;
+        }
+
+        .coupon input {
+            flex: 1;
+            padding: 13px;
+            border: none;
+            border-radius: 7px;
+            background: #0f0f15;
+            color: white;
+            outline: none;
+        }
+
+        .coupon button {
+            padding: 13px 20px;
+            border: none;
+            border-radius: 7px;
+            background: #ff3b3b;
+            color: white;
+            cursor: pointer;
+        }
+
+        .payment-method {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .method {
+            flex: 1;
+            min-width: 130px;
+            padding: 18px;
+            text-align: center;
+            background: #22222c;
+            border: 1px solid #444;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .method.selected {
+            background: #ff3b3b;
+            border-color: #ff3b3b;
+        }
+
+        .pay-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            background: #ff3b3b;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .pay-btn:hover {
+            background: #e52c2c;
+        }
+
+        #couponMessage {
+            margin-top: 12px;
+            color: #4caf50;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #111118;
+            color: #888;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">🎬 MovieHub</div>
+    </nav>
+
+    <div class="container">
+
+        <h1>💳 Secure Payment</h1>
+
+        <p class="subtitle">
+            Complete your booking securely
+        </p>
+
+        <!-- Booking Summary -->
+
+        <div class="card summary">
+
+            <h2>🎟️ Booking Summary</h2>
+
+            <p>🎬 Movie: <strong>Movie One</strong></p>
+
+            <p>📍 Theatre: <strong>MovieHub Cinemas</strong></p>
+
+            <p>📅 Date: <strong>Today</strong></p>
+
+            <p>🕐 Show: <strong>6:00 PM</strong></p>
+
+            <p>💺 Seats: <strong>A1, A2</strong></p>
+
+            <p class="total">
+                Total: ₹<span id="totalAmount">360</span>
+            </p>
+
+        </div>
+
+
+        <!-- Coupon -->
+
+        <div class="card">
+
+            <h2>🎁 Apply Coupon</h2>
+
+            <div class="coupon">
+
+                <input
+                    type="text"
+                    id="coupon"
+                    placeholder="Enter coupon code"
+                >
+
+                <button onclick="applyCoupon()">
+                    Apply
+                </button>
+
+            </div>
+
+            <p id="couponMessage"></p>
+
+        </div>
+
+
+        <!-- Payment Method -->
+
+        <div class="card">
+
+            <h2>💳 Payment Method</h2>
+
+            <div class="payment-method">
+
+                <div
+                    class="method"
+                    onclick="selectMethod(this)"
+                >
+                    📱 UPI
+                </div>
+
+                <div
+                    class="method"
+                    onclick="selectMethod(this)"
+                >
+                    💳 Card
+                </div>
+
+                <div
+                    class="method"
+                    onclick="selectMethod(this)"
+                >
+                    🏦 Net Banking
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="pay-btn"
+            onclick="makePayment()"
+        >
+            🔒 Pay Now
+        </button>
+
+    </div>
+
+    <footer>
+        © 2026 MovieHub | Movie Ticket Booking System
+    </footer>
+
+
+    <script>
+
+        let amount = 360;
+        let paymentMethod = "";
+
+        function applyCoupon() {
+
+            const coupon =
+                document.getElementById("coupon").value
+                .toUpperCase();
+
+            const message =
+                document.getElementById("couponMessage");
+
+            if (coupon === "MOVIE50") {
+
+                amount = 310;
+
+                document.getElementById("totalAmount")
+                    .textContent = amount;
+
+                message.textContent =
+                    "✅ Coupon applied! ₹50 discount.";
+
+            } else {
+
+                message.style.color = "#ff5252";
+
+                message.textContent =
+                    "❌ Invalid coupon code.";
+
+            }
+        }
+
+
+        function selectMethod(method) {
+
+            document
+                .querySelectorAll(".method")
+                .forEach(item => {
+                    item.classList.remove("selected");
+                });
+
+            method.classList.add("selected");
+
+            paymentMethod = method.textContent.trim();
+        }
+
+
+        function makePayment() {
+
+            if (paymentMethod === "") {
+
+                alert("Please select a payment method.");
+
+                return;
+            }
+
+            window.location.href = "ticket.html";
+
+        }
+
+    </script>
+
+</body>
+</html>
