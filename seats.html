@@ -379,17 +379,27 @@
         }
 
 
-        function continuePayment() {
+       function continuePayment() {
+    if (selectedSeats.length === 0) {
+        alert("Please select at least one seat.");
+        return;
+    }
 
-            if (selectedSeats.length === 0) {
+    const booking = JSON.parse(
+        sessionStorage.getItem("movieHubBooking")
+    ) || {};
 
-                alert("Please select at least one seat.");
+    booking.seats = selectedSeats.join(", ");
+    booking.seatCount = selectedSeats.length;
+    booking.total = document.getElementById("total").textContent;
 
-                return;
-            }
+    sessionStorage.setItem(
+        "movieHubBooking",
+        JSON.stringify(booking)
+    );
 
-            window.location.href = "payment.html";
-        }
+    window.location.href = "payment.html";
+}
 
     </script>
 
