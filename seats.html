@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MovieHub - Seat Selection</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #0b0b0f;
+            color: white;
+        }
+
+        nav {
+            padding: 20px 7%;
+            background: #111118;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff3b3b;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 35px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+
+        .screen {
+            text-align: center;
+            background: #ddd;
+            color: #111;
+            padding: 10px;
+            border-radius: 50%;
+            margin: 30px auto;
+            max-width: 500px;
+            box-shadow: 0 8px 20px rgba(255,255,255,0.15);
+        }
+
+        .seat-area {
+            background: #17171f;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #292933;
+        }
+
+        .row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin: 10px 0;
+        }
+
+        .row-label {
+            width: 25px;
+            color: #aaa;
+        }
+
+        .seat {
+            width: 38px;
+            height: 38px;
+            border: none;
+            border-radius: 8px 8px 5px 5px;
+            background: #333;
+            color: white;
+            cursor: pointer;
+        }
+
+        .seat:hover {
+            background: #555;
+        }
+
+        .seat.selected {
+            background: #2196f3;
+        }
+
+        .seat.booked {
+            background: #e53935;
+            cursor: not-allowed;
+        }
+
+        .premium {
+            background: #9c27b0;
+        }
+
+        .couple {
+            background: #ff9800;
+            width: 82px;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 25px 0;
+            color: #ccc;
+        }
+
+        .legend span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .box {
+            width: 18px;
+            height: 18px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .available-box {
+            background: #333;
+        }
+
+        .selected-box {
+            background: #2196f3;
+        }
+
+        .booked-box {
+            background: #e53935;
+        }
+
+        .premium-box {
+            background: #9c27b0;
+        }
+
+        .summary {
+            background: #17171f;
+            margin-top: 25px;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #292933;
+        }
+
+        .summary p {
+            margin: 10px 0;
+            color: #ccc;
+        }
+
+        .total {
+            font-size: 22px;
+            color: #ff3b3b;
+            font-weight: bold;
+        }
+
+        .continue {
+            width: 100%;
+            margin-top: 20px;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #ff3b3b;
+            color: white;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        .continue:hover {
+            background: #e52c2c;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            margin-top: 30px;
+            background: #111118;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">🎬 MovieHub</div>
+    </nav>
+
+    <div class="container">
+
+        <h1>💺 Select Your Seats</h1>
+
+        <p class="subtitle">
+            Choose your favourite seats
+        </p>
+
+        <div class="screen">
+            🎬 SCREEN
+        </div>
+
+        <div class="legend">
+            <span>
+                <i class="box available-box"></i> Available
+            </span>
+
+            <span>
+                <i class="box selected-box"></i> Selected
+            </span>
+
+            <span>
+                <i class="box booked-box"></i> Booked
+            </span>
+
+            <span>
+                <i class="box premium-box"></i> Premium
+            </span>
+        </div>
+
+        <div class="seat-area">
+
+            <div class="row">
+                <span class="row-label">A</span>
+                <button class="seat premium" onclick="selectSeat(this)">A1</button>
+                <button class="seat premium" onclick="selectSeat(this)">A2</button>
+                <button class="seat premium booked">A3</button>
+                <button class="seat premium" onclick="selectSeat(this)">A4</button>
+                <button class="seat premium" onclick="selectSeat(this)">A5</button>
+                <button class="seat premium" onclick="selectSeat(this)">A6</button>
+            </div>
+
+            <div class="row">
+                <span class="row-label">B</span>
+                <button class="seat" onclick="selectSeat(this)">B1</button>
+                <button class="seat" onclick="selectSeat(this)">B2</button>
+                <button class="seat booked">B3</button>
+                <button class="seat" onclick="selectSeat(this)">B4</button>
+                <button class="seat" onclick="selectSeat(this)">B5</button>
+                <button class="seat" onclick="selectSeat(this)">B6</button>
+            </div>
+
+            <div class="row">
+                <span class="row-label">C</span>
+                <button class="seat" onclick="selectSeat(this)">C1</button>
+                <button class="seat" onclick="selectSeat(this)">C2</button>
+                <button class="seat" onclick="selectSeat(this)">C3</button>
+                <button class="seat" onclick="selectSeat(this)">C4</button>
+                <button class="seat" onclick="selectSeat(this)">C5</button>
+                <button class="seat" onclick="selectSeat(this)">C6</button>
+            </div>
+
+            <div class="row">
+                <span class="row-label">D</span>
+                <button class="seat" onclick="selectSeat(this)">D1</button>
+                <button class="seat" onclick="selectSeat(this)">D2</button>
+                <button class="seat booked">D3</button>
+                <button class="seat" onclick="selectSeat(this)">D4</button>
+                <button class="seat" onclick="selectSeat(this)">D5</button>
+                <button class="seat" onclick="selectSeat(this)">D6</button>
+            </div>
+
+            <div class="row">
+                <span class="row-label">E</span>
+                <button class="seat" onclick="selectSeat(this)">E1</button>
+                <button class="seat" onclick="selectSeat(this)">E2</button>
+                <button class="seat" onclick="selectSeat(this)">E3</button>
+                <button class="seat" onclick="selectSeat(this)">E4</button>
+                <button class="seat" onclick="selectSeat(this)">E5</button>
+                <button class="seat" onclick="selectSeat(this)">E6</button>
+            </div>
+
+            <div class="row">
+                <span class="row-label">F</span>
+                <button class="seat couple" onclick="selectSeat(this)">F1-F2</button>
+                <button class="seat couple" onclick="selectSeat(this)">F3-F4</button>
+                <button class="seat couple" onclick="selectSeat(this)">F5-F6</button>
+            </div>
+
+        </div>
+
+        <div class="summary">
+
+            <p>
+                Selected Seats:
+                <strong id="selectedSeats">None</strong>
+            </p>
+
+            <p>
+                Number of Seats:
+                <strong id="seatCount">0</strong>
+            </p>
+
+            <p class="total">
+                Total: ₹<span id="total">0</span>
+            </p>
+
+            <button class="continue" onclick="continuePayment()">
+                Continue to Payment 💳
+            </button>
+
+        </div>
+
+    </div>
+
+    <footer>
+        © 2026 MovieHub | Movie Ticket Booking System
+    </footer>
+
+    <script>
+
+        const selectedSeats = [];
+
+        function selectSeat(seat) {
+
+            if (seat.classList.contains("booked")) {
+                return;
+            }
+
+            seat.classList.toggle("selected");
+
+            const seatName = seat.textContent;
+
+            if (seat.classList.contains("selected")) {
+
+                selectedSeats.push(seatName);
+
+            } else {
+
+                const index = selectedSeats.indexOf(seatName);
+
+                if (index > -1) {
+                    selectedSeats.splice(index, 1);
+                }
+            }
+
+            updateSummary();
+        }
+
+
+        function updateSummary() {
+
+            document.getElementById("seatCount").textContent =
+                selectedSeats.length;
+
+            document.getElementById("selectedSeats").textContent =
+                selectedSeats.length > 0
+                ? selectedSeats.join(", ")
+                : "None";
+
+            let total = 0;
+
+            document.querySelectorAll(".seat.selected").forEach(seat => {
+
+                if (seat.classList.contains("premium")) {
+                    total += 250;
+                }
+                else if (seat.classList.contains("couple")) {
+                    total += 500;
+                }
+                else {
+                    total += 180;
+                }
+
+            });
+
+            document.getElementById("total").textContent = total;
+        }
+
+
+        function continuePayment() {
+
+            if (selectedSeats.length === 0) {
+
+                alert("Please select at least one seat.");
+
+                return;
+            }
+
+            window.location.href = "payment.html";
+        }
+
+    </script>
+
+</body>
+</html>
