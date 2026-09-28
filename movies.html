@@ -107,14 +107,17 @@
             transform: translateY(-6px);
         }
 
-        .poster {
-            height: 300px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 70px;
-            background: linear-gradient(135deg, #411111, #17171f);
-        }
+        ..poster {
+    height: 300px;
+    overflow: hidden;
+    background: #17171f;
+}
+
+.poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
         .movie-info {
             padding: 20px;
@@ -201,50 +204,76 @@
         <div class="movies" id="movieList">
 
             <div class="movie-card">
-                <div class="poster">🎬</div>
+                <div class="movie-card">
 
-                <div class="movie-info">
-                    <h2>Movie One</h2>
-                    <p class="details">Action • 2h 30m</p>
-                    <p class="rating">⭐ 8.7/10</p>
-                    <a href="booking.html?movie=Movie%20One" class="book-btn">🎟️ Book Now</a>
-                </div>
-            </div>
+    <div class="poster">
+        <img src="paradise-poster.png" alt="Paradise">
+    </div>
 
-            <div class="movie-card">
-                <div class="poster">🔥</div>
+    <div class="movie-info">
+        <h2>Paradise</h2>
+        <p class="details">Drama • Thriller</p>
+        <p class="rating">⭐ 8.5/10</p>
 
-                <div class="movie-info">
-                    <h2>Movie Two</h2>
-                    <p class="details">Thriller • 2h 15m</p>
-                    <p class="rating">⭐ 8.4/10</p>
+        <a href="booking.html?movie=Paradise" class="book-btn">
+            🎟️ Book Now
+        </a>
+    </div>
 
-                    <a href="booking.html?movie=Movie%20Two" class="book-btn">🎟️ Book Now</a>
-                </div>
-            </div>
+</div>
+
+
 
             <div class="movie-card">
-                <div class="poster">❤️</div>
+                <div class="poster">
+        <img src="salar2-poster.png" alt="Salaar 2">
+    </div>
 
-                <div class="movie-info">
-                    <h2>Love Story</h2>
-                    <p class="details">Romance • 2h 10m</p>
-                    <p class="rating">⭐ 8.2/10</p>
-                     <a href="booking.html?movie=Love%20Story" class="book-btn">🎟️ Book Now</a>
-                </div>
-            </div>
+    <div class="movie-info">
+        <h2>Salaar 2</h2>
+        <p class="details">Action • Drama</p>
+        <p class="rating">⭐ 8.8/10</p>
+
+        <a href="booking.html?movie=Salaar%202" class="book-btn">
+            🎟️ Book Now
+        </a>
+    </div>
+
+</div>
 
             <div class="movie-card">
-                <div class="poster">😂</div>
+                <div class="poster">
+        <img src="fauzi-poster.png" alt="Fauzi">
+    </div>
 
-                <div class="movie-info">
-                    <h2>Comedy Night</h2>
-                    <p class="details">Comedy • 1h 55m</p>
-                    <p class="rating">⭐ 7.9/10</p>
+    <div class="movie-info">
+        <h2>Fauzi</h2>
+        <p class="details">Action • War</p>
+        <p class="rating">⭐ 8.6/10</p>
 
-                    <a href="booking.html?movie=Comedy%20Night" class="book-btn">🎟️ Book Now</a>
-                </div>
-            </div>
+        <a href="booking.html?movie=Fauzi" class="book-btn">
+            🎟️ Book Now
+        </a>
+    </div>
+
+</div>
+
+            <div class="movie-card">
+                <div class="poster">
+        <img src="spirit-poster.png" alt="Spirit">
+    </div>
+
+    <div class="movie-info">
+        <h2>Spirit</h2>
+        <p class="details">Action • Crime</p>
+        <p class="rating">⭐ 8.7/10</p>
+
+        <a href="booking.html?movie=Spirit" class="book-btn">
+            🎟️ Book Now
+        </a>
+    </div>
+
+</div>
 
         </div>
 
